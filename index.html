@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  
+  <meta charset="utf-8">
+  <title>Brew Hopper</title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Foundation Stylesheet -->
+  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  
+  <!-- Created stylesheet -->
+  <link href="style.css" rel="stylesheet">
+
+  <!-- JQuery Script CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+
+  <header>
+    <!-- Title bar with Brew Hopper as title and logo -->
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <span class="title-bar-title">Brew Hopper</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- Left side of page with the user inputs -->
+    <div id="userinputs">
+      <!-- Start with Location, verify ipinfo (if good add locate me button), if not ipinfo add a text area for location -->
+      <!-- Another userinput for amount of breweries to go to -->
+      <!-- Another userinut fr max distance (span with amount of breweries) -->
+      <!-- submit button for userinputs -->
+      <!-- Div that will auto populate list of breweries(display: none?) -->
+    </div>
+    <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
+    <div id="map">
+      <!-- include a title bar to the map(find brews here) -->
+    </div>
   
+  </main>
+  
+  <footer>
+    <!-- Footer with same css as header including a link to a contact us page? -->
+  </footer>
+  
+  <script src="script.js"></script>
 </body>
+
 </html>
