@@ -1,0 +1,47 @@
+/* Title Bar Styling */
+.title-bar-left {
+    color: white;
+    font-size:x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Input Form Styling */
+.translucent-form-overlay {
+    max-width: 500px;
+    width: 100%;
+    background-color: black; 
+    padding: 20px;
+    color: #fefefe;
+  }
+  
+  .translucent-form-overlay .columns.row {
+    display: block;
+  }
+  
+  .translucent-form-overlay h3, .translucent-form-overlay label {
+    color: #fefefe;
+  }
+  
+  .translucent-form-overlay input, .translucent-form-overlay select {
+    color: #8a8a8a;
+  }
+  
+  .translucent-form-overlay input::-webkit-input-placeholder {
+    color: #8a8a8a;
+  }
+  
+  .translucent-form-overlay input:-ms-input-placeholder {
+    color: #8a8a8a;
+  }
+  
+  .translucent-form-overlay input::placeholder {
+    color: #8a8a8a;
+  }
+  
+/* Map Container Styling */
+
+/* Map Title bar Styling */
+
+/* Footer Styling */
+
+
