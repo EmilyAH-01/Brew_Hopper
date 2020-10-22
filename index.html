@@ -17,6 +17,15 @@
 
   <!-- JQuery Script CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Link to Font Awesome icons used -->
+  <link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+  crossorigin="anonymous"
+/>
+
 </head>
 
 <body>
@@ -30,21 +39,50 @@
     </div>
   </header>
 
-  <main>
+  <main class="container">
     
     <!-- Left side of page with the user inputs -->
-    <div id="userinputs">
-      <!-- Start with Location, verify ipinfo (if good add locate me button), if not ipinfo add a text area for location -->
-      <!-- Another userinput for amount of breweries to go to -->
-      <!-- Another userinut fr max distance (span with amount of breweries) -->
-      <!-- submit button for userinputs -->
-      <!-- Div that will auto populate list of breweries(display: none?) -->
-    </div>
-    <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
-    <div id="map">
-      <!-- include a title bar to the map(find brews here) -->
-    </div>
-  
+    
+    <div class="row gutter-large">  
+      
+      <div id="userinputs" class="columns small-5 large-4">
+        <div class="translucent-form-overlay">
+          <form>
+            <h3>Search for Breweries
+              <span><i class="fas fa-beer"></i></span>
+            </h3>
+            <div class="row columns">
+              <label>IP address/Location:
+                <input type="text" name="keyword" placeholder="xxx.xxx.xxx.xxx">
+              </label>
+            </div>
+            <div class="row columns">
+              <label>Distance:
+                <select name="status" type="text">
+                  <option value="1" >One Mile</option>
+                  <option value="5">Five Miles</option>
+                  <option value="10">Ten Miles</option>
+                </select>
+              </label>
+            </div>
+            <div class="row columns">
+              <label>How Many:
+                <input name="amount" type="number" min="1" max="5">
+              </label>
+            </div>
+            <button type="button" class="primary button expanded search-button">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
+      <div id="map" class="columns small-7 large-8">
+        <!-- include a title bar to the map(find brews here) -->
+        <h3>Map:</h2>
+      </div>
+    </div>  
   </main>
   
   <footer>
