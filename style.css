@@ -3,45 +3,55 @@
     color: white;
     font-size:x-large;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    /* Input Form Styling */
+  }
+  .title-bar {
+      background-color: black;
+  }
+    /* Input Form Styling "Search for Breweries */
 .translucent-form-overlay {
     max-width: 500px;
     width: 100%;
     background-color: black; 
     padding: 20px;
     color: #fefefe;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .translucent-form-overlay .columns.row {
+  .translucent-form-overlay .row.columns {
     display: block;
   }
   
+  /* IP Address/Location Placeholder Styling */
+  .translucent-form-overlay input::placeholder {
+    color: black;
+  }
+  
+  /* Title and Input Labels Styling */ 
   .translucent-form-overlay h3, .translucent-form-overlay label {
     color: #fefefe;
   }
-  
+  /* Distance Selector Input Styling */
   .translucent-form-overlay input, .translucent-form-overlay select {
-    color: #8a8a8a;
+    color: black;
+  } 
+  /* Search Button Styling */
+  #btnSubmit {
+      background-color:teal;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      padding: 15px;
+      font-size: larger;
   }
-  
-  .translucent-form-overlay input::-webkit-input-placeholder {
-    color: #8a8a8a;
-  }
-  
-  .translucent-form-overlay input:-ms-input-placeholder {
-    color: #8a8a8a;
-  }
-  
-  .translucent-form-overlay input::placeholder {
-    color: #8a8a8a;
-  }
-  
+
 /* Map Container Styling */
+#map {
+
+}
 
 /* Map Title bar Styling */
-
+#mapContainer{
+    
+}
 /* Footer Styling */
 
 
