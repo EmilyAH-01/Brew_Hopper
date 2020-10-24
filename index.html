@@ -53,12 +53,12 @@
             </h3>
             <div class="row columns">
               <label>IP address/Location:
-                <input type="text" name="keyword" placeholder="xxx.xxx.xxx.xxx">
+                <input id="userLocation" type="text" name="keyword" placeholder="xxx.xxx.xxx.xxx">
               </label>
             </div>
             <div class="row columns">
               <label>Distance:
-                <select name="status" type="text">
+                <select id="userDistance" name="status" type="text">
                   <option value="1" >One Mile</option>
                   <option value="5">Five Miles</option>
                   <option value="10">Ten Miles</option>
@@ -67,10 +67,10 @@
             </div>
             <div class="row columns">
               <label>How Many:
-                <input name="amount" type="number" min="1" max="5">
+                <input id="userAmount" name="amount" type="number" min="1" max="5">
               </label>
             </div>
-            <button type="button" class="primary button expanded search-button">
+            <button id="btnSubmit" type="button" class="primary button expanded search-button">
               Search
             </button>
           </form>
@@ -80,7 +80,8 @@
       <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
       <div id="map" class="columns small-7 large-8">
         <!-- include a title bar to the map(find brews here) -->
-        <h3>Map:</h2>
+        <div id="mapContainer" style="width: 640px; height: 480px"></div><h3>Map:</h3>
+      
       </div>
     </div>  
   </main>
@@ -89,7 +90,14 @@
     <!-- Footer with same css as header including a link to a contact us page? -->
   </footer>
   
+  <!-- Created Javascript -->
   <script src="script.js"></script>
+
+  <!-- Here maps API script -->
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+  <script src="maps.js"></script>
 </body>
 
 </html>
