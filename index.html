@@ -26,6 +26,21 @@
   crossorigin="anonymous"
 />
 
+<style>
+  @media screen and (max-width: 380px) {
+    #mapContainer {
+      width: 350px; 
+      height: 480px;
+    };
+  };
+  @media screen and (min-width: 760px){
+    #mapContainer {
+      width: 640px; 
+      height: 480px;
+    };
+  };
+</style>
+
 </head>
 
 <body>
@@ -80,7 +95,7 @@
       <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
       <div id="map" class="columns small-12 large-8" style="margin-top: 10px;">
         <!-- include a title bar to the map(find brews here) -->
-        <div id="mapContainer" style="width: 640px; height: 480px"></div><h3>Map:</h3>
+        <div id="mapContainer"></div><h3>Map:</h3>
       
       </div>
     </div>  
