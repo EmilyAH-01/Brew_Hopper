@@ -7,7 +7,8 @@
   .title-bar {
       background-color: black;
   }
-    /* Input Form Styling "Search for Breweries */
+
+/* Input Form Styling "Search for Breweries */
 .translucent-form-overlay {
     max-width: 500px;
     width: 100%;
@@ -41,7 +42,15 @@
       color: white;
       padding: 15px;
       font-size: larger;
-      
+  }
+
+  /* Location Button Styling */
+  #btnLocation {
+    background-color:teal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    padding: 10px;
+    /*font-size: larger;*/
   }
 
 /* Map Container Styling */

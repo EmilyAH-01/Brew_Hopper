@@ -1,15 +1,41 @@
+/** @param  {H.Map} map   A HERE Map instance within the application*/
+  
+//Boilerplate map initialization code starts below: ////////////////////////////////////////////
+
+//Step 1: initialize communication with the platform
+var platform = new H.service.Platform({
+    apikey: "WA5zgFYxYEOnCCMo-GZ0kZY3fQYwbCt3VT0Wdmrs_00"
+});
+
+// Obtain the default map types from the platform
+var defaultLayers = platform.createDefaultLayers();
+
+// Initialize a map centered over coordinates defined by latLocal and lngLocal variables
+var map = new H.Map(document.getElementById("mapContainer"), defaultLayers.vector.normal.map, {
+    center: {lat: 38.0000, lng: -97.0000}, // Geographic center or contiguous US
+    zoom: 4,
+    pixelRatio: window.devicePixelRatio || 1
+});
+
+// Add a resize listener to make sure that the map occupies the whole container
+window.addEventListener('resize', () => map.getViewPort().resize());
+
+// Enable the event system on the map instance:
+var mapEvents = new H.mapevents.MapEvents(map);
+
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+new H.mapevents.Behavior(mapEvents);
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 var x = document.getElementById("locale");
-// function to see if browser suppots geolocation
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
 
 //this will pull city name from longitude and latitude
 function success(position) {
+    var latMaps = position.coords.latitude;
+    var lonMaps = position.coords.longitude;
+    map.setCenter({lat: latMaps, lng: lonMaps});
+    map.setZoom(13);
+
     var latLocal = "&lat=" + position.coords.latitude;
     var lngLocal = "&lon=" + position.coords.longitude;
     var myAPI = "pk.e571425f77b016689b9002ca2f527825";
@@ -31,10 +57,21 @@ function success(position) {
     console.log(city);
     var cityLocale = city.address.city;
 
-    brewery(cityLocale);
+    //brewery(cityLocale);
     })
-
 }
+
+// function to see if browser supports geolocation
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+$("#btnLocation").on("click", getLocation());
+
 
 function brewery(cityLocale){
 // will get local brewery information based on the city
