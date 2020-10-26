@@ -1,8 +1,7 @@
 /** @param  {H.Map} map   A HERE Map instance within the application*/
   
-//Boilerplate map initialization code starts below: ////////////////////////////////////////////
-
-//Step 1: initialize communication with the platform
+//Code taken from HERE Maps documentation ////////////////////////////////////////////////////
+// Initialize communication with the platform
 var platform = new H.service.Platform({
     apikey: "WA5zgFYxYEOnCCMo-GZ0kZY3fQYwbCt3VT0Wdmrs_00"
 });
@@ -57,7 +56,7 @@ function success(position) {
     console.log(city);
     var cityLocale = city.address.city;
 
-    //brewery(cityLocale);
+    brewery(cityLocale);
     })
 }
 
@@ -95,86 +94,88 @@ var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
 
         for(var i=0; i < response.length; i++) {
 
-                var brewNum = i+1;
-                var brewName = response[i].name;
-                var cityState = " " + response[i].city + ", " + response[i].state + " " + response[i].postal_code;
-    
-                var webLinkaddress = response[i].website_url;
+            var brewNum = i+1;
+            var brewName = response[i].name;
+            var cityState = " " + response[i].city + ", " + response[i].state + " " + response[i].postal_code;
 
-                // if (webLinkaddress == "");
-                //     webLinkaddress = "Unknown";
+            var webLinkaddress = response[i].website_url;
 
+            // if (webLinkaddress == "");
+            //     webLinkaddress = "Unknown";
 
-                console.log(webLinkaddress);
+            console.log(webLinkaddress);
 
-                var startCard = $("<div>");
-                startCard.attr("id", "brewCards" + brewNum);
+            var startCard = $("<div>");
+            startCard.attr("id", "brewCards" + brewNum);
 
-                var indCard = $("<div>");
-                indCard.addClass("brewCard");
+            var indCard = $("<div>");
+            indCard.addClass("brewCard");
 
-                var webLink = $("<A>");
-                webLink.addClass("link");
-                webLink.attr({id: "weblink-" + brewNum});
-                webLink.attr("href", webLinkaddress);
-                webLink.text(webLinkaddress);
-                
-            
-                var nameHeader = $("<h4>");
-                nameHeader.addClass("header4");
-                nameHeader.attr({id: "name-"+ brewNum});
-                nameHeader.css("margin-bottom", "0px");
-                nameHeader.text(brewName);
-
-                var breweryPar1 = $("<p>");
-                breweryPar1.addClass("type");
-                breweryPar1.attr({id: "typeP-" + brewNum
-                });
-                breweryPar1.text("Type: " + response[i].brewery_type);
-
-                var breweryPar2 = $("<p>");
-                breweryPar2.addClass("address");
-                breweryPar2.css("margin", "0px");
-                breweryPar2.attr({id: "addressP-" + brewNum
-                });
-                breweryPar2.text(response[i].street);
-                
-                var breweryPar3 = $("<span>");
-                breweryPar3.addClass("city_state");
-                breweryPar3.attr({id:"city_state-" + brewNum});
-                breweryPar3.text(cityState);
-
-                console.log(cityState);
-
-                //this is for the phone number - Need to format phone number
-                var breweryPar4 = $("<p>");
-                breweryPar4.addClass("Phone");
-                breweryPar4.attr({id:"Phone-" + brewNum});
-                breweryPar4.text("Phone: " + response[i].phone);
-
-                var website = $("<span>");
-                website.addClass("website");
-                website.attr({id:"Website-" + brewNum});
-                website.text("Website:")
-
-
-                //This is where the information will be placed in the appropriate
-                //card
-                startCard.empty();
-                website.append(webLink);
-                indCard.append(nameHeader);
-                indCard.append(breweryPar1);
-                indCard.append(breweryPar2);
-                indCard.append(breweryPar3);
-                indCard.append(breweryPar4);
-                indCard.append(website)
-                startCard.append(indCard);
-                $("#brewlist").append(startCard);
-        }    
+            var webLink = $("<A>");
+            webLink.addClass("link");
+            webLink.attr({id: "weblink-" + brewNum});
+            webLink.attr("href", webLinkaddress);
+            webLink.text(webLinkaddress);
         
+            var nameHeader = $("<h4>");
+            nameHeader.addClass("header4");
+            nameHeader.attr({id: "name-"+ brewNum});
+            nameHeader.css("margin-bottom", "0px");
+            nameHeader.text(brewName);
+
+            var buttonSpan = $("<span>");
+            var breweryBtn = $("<button>");
+            breweryBtn.addClass("breweryButton");
+            breweryBtn.attr({id:"Button-" + brewNum});
+            breweryBtn.text("Add to Map");
+
+            
+            buttonSpan.append(breweryBtn);
+            nameHeader.append(buttonSpan);
+            
+
+            var breweryPar1 = $("<p>");
+            breweryPar1.addClass("type");
+            breweryPar1.attr({id: "typeP-" + brewNum});
+            breweryPar1.text("Type: " + response[i].brewery_type);
+
+            var breweryPar2 = $("<p>");
+            breweryPar2.addClass("address");
+            breweryPar2.css("margin", "0px");
+            breweryPar2.attr({id: "addressP-" + brewNum});
+            breweryPar2.text(response[i].street);
+            
+            var breweryPar3 = $("<span>");
+            breweryPar3.addClass("city_state");
+            breweryPar3.attr({id:"city_state-" + brewNum});
+            breweryPar3.text(cityState);
+
+            console.log(cityState);
+
+            //this is for the phone number - Need to format phone number
+            var breweryPar4 = $("<p>");
+            breweryPar4.addClass("Phone");
+            breweryPar4.attr({id:"Phone-" + brewNum});
+            breweryPar4.text("Phone: " + response[i].phone);
+
+            var website = $("<span>");
+            website.addClass("website");
+            website.attr({id:"Website-" + brewNum});
+            website.text("Website:")
 
 
+            //This is where the information will be placed in the appropriate
+            //card
+            startCard.empty();
+            website.append(webLink);
+            indCard.append(nameHeader);
+            indCard.append(breweryPar1);
+            indCard.append(breweryPar2);
+            indCard.append(breweryPar3);
+            indCard.append(breweryPar4);
+            indCard.append(website);
+            startCard.append(indCard);
+            $("#brewlist").append(startCard);
+        }    
     })
-
-
 }

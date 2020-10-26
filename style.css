@@ -50,7 +50,16 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     padding: 10px;
-    /*font-size: larger;*/
+    margin-bottom: 10px;
+  }
+
+  .breweryButton {
+    background-color:teal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+    font-size: smaller;
   }
 
 /* Map Container Styling */

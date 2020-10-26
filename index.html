@@ -28,6 +28,8 @@
   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
 
+  <!-- For some reason map doesn't show up for me unless height and width are 
+  specifed inside the mapContainer div -Emily -->
   <style>
     @media screen and (max-width: 380px) {
       #mapContainer {
@@ -37,8 +39,8 @@
     };
     @media screen and (min-width: 760px){
       #mapContainer {
-        width: 640px; 
-        height: 480px
+        width: 540px; 
+        height: 380px
       };
     };
   </style>
