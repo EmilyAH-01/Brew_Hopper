@@ -1,6 +1,6 @@
 /* Title Bar Styling */
 .title-bar-left {
-    color: white;
+    color: whitesmoke;
     font-size:x-large;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -77,9 +77,21 @@
   };
 };
 
+/* Brewery List Styling */
 
-/* Map Title bar Styling */
 
 /* Footer Styling */
+
+footer .btnContact {
+  color: teal;
+  font-size: larger;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  
+}
+
+.btnContact:hover {
+  color:black;
+  background-color:teal;
+}
 
 
