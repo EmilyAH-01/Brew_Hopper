@@ -27,34 +27,30 @@ new H.mapevents.Behavior(mapEvents);
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 var x = document.getElementById("locale");
-
+var stateLocale;
+var currentLocation;
+var radius = 1;
 
 $(document).ready(function() {
     $("#brewlistHeader").hide();
 })
 
-
-// this is the small change that I made to the function]
-// for somereason it called the function when the page loaded.
 $("#btnLocation").on("click", function(event){
-
-// function to see if browser supports geolocation
+    // function to see if browser supports geolocation
     event.preventDefault();
 
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
 });
-
 
 //this will pull city name from longitude and latitude
 function success(position) {
     var latMaps = position.coords.latitude;
     var lonMaps = position.coords.longitude;
+    currentLocation = [latMaps, lonMaps];
     map.setCenter({lat: latMaps, lng: lonMaps});
     map.setZoom(13);
 
@@ -73,12 +69,9 @@ function success(position) {
 		method: "GET"
 
 	})
-	.then(function(city) {
-
-    console.log(city);
-    var cityLocale = city.address.city;
-
-    brewery(cityLocale);
+	.then(function(state) {
+        stateLocale = state.address.state;
+        console.log(stateLocale);  
     })
 }
 
@@ -89,124 +82,141 @@ function brewery(cityLocale){
     $("#brewlistHeader").show();
     $("#brewlist").empty();
 
-    // will get local brewery information based on the city
-    // need to fiqure out how to pull other breweries from a radius
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
+    // will get local brewery information based on the state
+    var queryURL1 = "https://api.openbrewerydb.org/breweries?per_page=50&by_state="+stateLocale;
+    var queryURL2 = "https://api.openbrewerydb.org/breweries?page=2&per_page=50&by_state="+stateLocale;
+    var queryURL3 = "https://api.openbrewerydb.org/breweries?page=3&per_page=50&by_state="+stateLocale;
+    var queryURL4 = "https://api.openbrewerydb.org/breweries?page=4&per_page=50&by_state="+stateLocale;
+    var queryURL5 = "https://api.openbrewerydb.org/breweries?page=5&per_page=50&by_state="+stateLocale;
+    var queryURL6 = "https://api.openbrewerydb.org/breweries?page=6&per_page=50&by_state="+stateLocale;
+    var queryURL7 = "https://api.openbrewerydb.org/breweries?page=7&per_page=50&by_state="+stateLocale;
+
+    queryURL = [queryURL1, queryURL2, queryURL3, queryURL4, queryURL5, queryURL6, queryURL7];
 
     // Perfoming an AJAX GET request to our queryURL
+    for (var m = 0; m < 8; m++) {
         $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+            url: queryURL[m],
+            method: "GET"
+        })
 
-    // After the data from the AJAX request comes back
-    .then(function(response) {
-        console.log(queryURL);
-        console.log(response);
+        // After the data from the AJAX request comes back
+        .then(function(response) {
+            console.log(queryURL);
+            console.log(response);
 
-        for(var i=0; i < response.length; i++) {
+            for(var i=0; i < response.length; i++) {
+                response[i].latitude
+                response[i].longitude
 
-            var brewNum = i+1;
-            var brewName = response[i].name;
-            var zipCode = response[i].postal_code.substr(0,5);
-            var cityState = " " + response[i].city + ", " + response[i].state + " " + zipCode;
-            var phone = response[i].phone;
+                var p1 = new H.geo.Point(response[i].latitude, response[i].longitude);
+                var p2 = new H.geo.Point(currentLocation[0], currentLocation[1]);
+                var dist = (p1.distance(p2))/1609; 
 
-            if (phone === "") {
-                var formatted = "Unlisted";
-            } else {
-                var formatted = "(" + phone.substr(0, 3)+ ") " + phone.substr(3, 3) + '-' + phone.substr(6,4);
-            }
+                if (dist < radius) {
+                    var brewNum = i+1;
+                    var brewName = response[i].name;
+                    var zipCode = response[i].postal_code.substr(0,5);
+                    var cityState = " " + response[i].city + ", " + response[i].state + " " + response[i].postal_code;
+                    var cityState = " " + response[i].city + ", " + response[i].state + " " + zipCode;
+                    var phone = response[i].phone;
 
+                    if (phone === "") {
+                        var formatted = "Unlisted";
+                    } else {
+                        var formatted = "(" + phone.substr(0, 3)+ ") " + phone.substr(3, 3) + '-' + phone.substr(6,4);
+                    }
 
-            var webLinkaddress = response[i].website_url;
+                    var webLinkaddress = response[i].website_url;
 
-            locations[i] = {
-                brewLat: response[i].latitude,
-                brewLon: response[i].longitude
-            }
+                    locations[i] = {
+                        brewLat: response[i].latitude,
+                        brewLon: response[i].longitude
+                    }
 
-            console.log(webLinkaddress);
-
-            var startCard = $("<div>");
-            startCard.addClass("brewCard");
-
-            var indCard = $("<div>");
-            indCard.attr("id", "brewCards" + brewNum);
-
-            var webLink = $("<A>");
-            webLink.addClass("link");
-            webLink.attr({id: "weblink-" + brewNum});
-
-                if (webLinkaddress === "") {
-                    var webLinktext = "Unknown";
                     console.log(webLinkaddress);
-                } else {
-                    webLink.attr("href", webLinkaddress);
-                    var webLinktext = webLinkaddress.replace("http://","");
+
+                    var startCard = $("<div>");
+                    startCard.addClass("brewCard");
+
+                    var indCard = $("<div>");
+                    indCard.attr("id", "brewCards" + brewNum);
+
+                    var webLink = $("<A>");
+                    webLink.addClass("link");
+                    webLink.attr({id: "weblink-" + brewNum});
+
+                    if (webLinkaddress === "") {
+                        var webLinktext = "Unknown";
+                        console.log(webLinkaddress);
+                    } else {
+                        webLink.attr("href", webLinkaddress);
+                        var webLinktext = webLinkaddress.replace("http://","");
+                    }
+
+                    webLink.text(webLinktext);
+                
+                    var nameHeader = $("<h4>");
+                    nameHeader.addClass("header4");
+                    nameHeader.attr({id: "name-" + brewNum});
+                    nameHeader.css("margin-bottom", "0px");
+                    nameHeader.text(brewName);
+
+                    var buttonSpan = $("<span>");
+                    var breweryBtn = $("<button>");
+                    breweryBtn.addClass("breweryButton");
+                    breweryBtn.attr({id: brewNum - 1});
+                    breweryBtn.text("Add to Map");
+
+                    buttonSpan.append(breweryBtn);
+                    nameHeader.append(buttonSpan);
+                    
+                    var breweryPar1 = $("<p>");
+                    breweryPar1.addClass("type");
+                    breweryPar1.attr({id: "typeP-" + brewNum});
+                    breweryPar1.text("Type: " + response[i].brewery_type);
+
+                    var breweryPar2 = $("<p>");
+                    breweryPar2.addClass("address");
+                    breweryPar2.css("margin", "0px");
+                    breweryPar2.attr({id: "addressP-" + brewNum});
+                    breweryPar2.text(response[i].street);
+                    
+                    var breweryPar3 = $("<span>");
+                    breweryPar3.addClass("city_state");
+                    breweryPar3.attr({id:"city_state-" + brewNum});
+                    breweryPar3.text(cityState);
+
+                    console.log(cityState);
+
+                    //this is for the phone number - Need to format phone number
+                    var breweryPar4 = $("<p>");
+                    breweryPar4.addClass("Phone");
+                    breweryPar4.attr({id:"Phone-" + brewNum});
+                    breweryPar4.text("Phone: " + formatted);
+
+                    var website = $("<span>");
+                    website.addClass("website");
+                    website.attr({id:"Website-" + brewNum});
+                    website.text("Website:")
+
+
+                    //This is where the information will be placed in the appropriate
+                    //card
+                    // startCard.empty();
+                    website.append(webLink);
+                    indCard.append(nameHeader);
+                    indCard.append(breweryPar1);
+                    indCard.append(breweryPar2);
+                    indCard.append(breweryPar3);
+                    indCard.append(breweryPar4);
+                    indCard.append(website);
+                    startCard.append(indCard);
+                    $("#brewlist").append(startCard);
                 }
-
-            webLink.text(webLinktext);
-        
-            var nameHeader = $("<h4>");
-            nameHeader.addClass("header4");
-            nameHeader.attr({id: "name-" + brewNum});
-            nameHeader.css("margin-bottom", "0px");
-            nameHeader.text(brewName);
-
-            var buttonSpan = $("<span>");
-            var breweryBtn = $("<button>");
-            breweryBtn.addClass("breweryButton");
-            breweryBtn.attr({id: brewNum - 1});
-            breweryBtn.text("Add to Map");
-
-            buttonSpan.append(breweryBtn);
-            nameHeader.append(buttonSpan);
-            
-            var breweryPar1 = $("<p>");
-            breweryPar1.addClass("type");
-            breweryPar1.attr({id: "typeP-" + brewNum});
-            breweryPar1.text("Type: " + response[i].brewery_type);
-
-            var breweryPar2 = $("<p>");
-            breweryPar2.addClass("address");
-            breweryPar2.css("margin", "0px");
-            breweryPar2.attr({id: "addressP-" + brewNum});
-            breweryPar2.text(response[i].street);
-            
-            var breweryPar3 = $("<span>");
-            breweryPar3.addClass("city_state");
-            breweryPar3.attr({id:"city_state-" + brewNum});
-            breweryPar3.text(cityState);
-
-            console.log(cityState);
-
-            //this is for the phone number - Need to format phone number
-            var breweryPar4 = $("<p>");
-            breweryPar4.addClass("Phone");
-            breweryPar4.attr({id:"Phone-" + brewNum});
-            breweryPar4.text("Phone: " + formatted);
-
-            var website = $("<span>");
-            website.addClass("website");
-            website.attr({id:"Website-" + brewNum});
-            website.text("Website:")
-
-
-            //This is where the information will be placed in the appropriate
-            //card
-            // startCard.empty();
-            website.append(webLink);
-            indCard.append(nameHeader);
-            indCard.append(breweryPar1);
-            indCard.append(breweryPar2);
-            indCard.append(breweryPar3);
-            indCard.append(breweryPar4);
-            indCard.append(website);
-            startCard.append(indCard);
-            $("#brewlist").append(startCard);
-        }    
-    })
+            }
+        })
+    }
 };
 
 var breweriesClicked = [];
@@ -247,6 +257,15 @@ $(document).on("click", ".breweryButton", function() {
         $("#brewlistHeader").append(newSpan);
     }
 
+});
+
+$(".btnSubmit").on("click", function(event) {
+    event.preventDefault();
+
+    radius = $("#userDistance").val();
+    console.log(radius);
+
+    brewery(stateLocale);
 });
 
 // Routing ////////////////////////////////////////////////////////////////////////////////////
