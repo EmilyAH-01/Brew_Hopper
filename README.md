@@ -35,6 +35,7 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
 
     - Only contains the Main Header, overall map and the Location Search Input Page  
     
+
     *Opening Page*![Opening Page](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/OpeningPage.png)
     
     - Asks the user for permission to get location
@@ -50,6 +51,7 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
     - Gives a list of all the local breweries along with their information
     - Allows user to add the items to the map and calculate a route to the different locations 
     
+
     *Initial Results*![Initial Results](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/ListShowing.png)
     
     - Displays the location of the locale breweries on the map
@@ -59,6 +61,7 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
     - Shows the best route between the different locations
 
     *Route Layout*![Route](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/Route.png)
+
     </details>
 
 ## Project Requirements: <a name="projectrequirements"></a>
