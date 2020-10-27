@@ -87,6 +87,7 @@ var locations = [];
 function brewery(cityLocale){
 
     $("#brewlistHeader").show();
+    $("#brewlist").empty();
 
     // will get local brewery information based on the city
     // need to fiqure out how to pull other breweries from a radius
@@ -194,7 +195,7 @@ function brewery(cityLocale){
 
             //This is where the information will be placed in the appropriate
             //card
-            startCard.empty();
+            // startCard.empty();
             website.append(webLink);
             indCard.append(nameHeader);
             indCard.append(breweryPar1);
