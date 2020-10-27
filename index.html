@@ -15,36 +15,37 @@
   <!-- Created stylesheet -->
   <link href="style.css" rel="stylesheet">
 
-  <!-- JQuery Script CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
   <!-- Link to Font Awesome icons used -->
   <link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-  crossorigin="anonymous"
-/>
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"
+  />
 
-<style>
-  @media screen and (max-width: 380px) {
-    #mapContainer {
-      width: 350px; 
-      height: 480px;
+  <!-- Here maps API script -->
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+
+  <style>
+    @media screen and (max-width: 380px) {
+      #mapContainer {
+        width: 330px; 
+        height: 300px
+      };
     };
-  };
-  @media screen and (min-width: 760px){
-    #mapContainer {
-      width: 640px; 
-      height: 480px;
+    @media screen and (min-width: 760px){
+      #mapContainer {
+        width: 640px; 
+        height: 480px
+      };
     };
-  };
-</style>
+  </style>
 
 </head>
 
-<body>
-
+<body style="background-image:url(https://www.designbolts.com/wp-content/uploads/2012/12/Skeletal-Weave-White-Tileable-pattern-for-website-background.jpg)">
   <header>
     <!-- Title bar with Brew Hopper as title and logo -->
     <div class="title-bar">
@@ -69,12 +70,12 @@
               <span><i class="fas fa-beer"></i></span>
             </h3>
             <div class="row columns">
-              <label>IP address/Location:
-                <input id="userLocation" type="text" name="keyword" placeholder="xxx.xxx.xxx.xxx">
-              </label>
+              <!-- <label>Locate me:</label> -->
+              <!--<input id="userLocation" type="text" name="keyword" placeholder="xxx.xxx.xxx.xxx">-->
+              <button id="btnLocation"><i class="fa fa-map-marker"></i> Locate Me</button>
             </div>
             <div class="row columns">
-              <label>Distance:
+              <label>Search radius:
                 <select id="userDistance" name="status" type="text">
                   <option value="1" >One Mile</option>
                   <option value="5">Five Miles</option>
@@ -82,11 +83,12 @@
                 </select>
               </label>
             </div>
-            <div class="row columns">
+            <!-- <div class="row columns">
               <label>How Many:
                 <input id="userAmount" name="amount" type="number" min="1" max="5">
               </label>
-            </div>
+            </div> -->
+            
             
             <button id="btnSubmit" type="button" class="btnSubmit">
 
@@ -99,24 +101,35 @@
       <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
       <div id="map" class="columns small-12 large-8" style="margin-top: 10px;">
         <!-- include a title bar to the map(find brews here) -->
-        <div id="mapContainer"></div><h3>Map:</h3>
+        <div id="mapContainer"></div>
       
       </div>
     </div>  
-  </main>
-  
-  <footer>
-    <!-- Footer with same css as header including a link to a contact us page? -->
-  </footer>
-  
-  <!-- Created Javascript -->
-  <script src="script.js"></script>
 
-  <!-- Here maps API script -->
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
-  <script src="maps.js"></script>
+    <!-- Brewery list -->
+    <div id="breweries" class = "row">
+      <div id="brewlist" class = "col-md-12">
+        <h4 id="brewlistHeader">Closest Breweries</h4>
+        <p id="locale"></p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JQuery Script CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Created Javascript -->
+  <!-- <script src="script.js"></script> -->
+
+  <script src="brewery.js"></script>
+
+  <!-- <script src="maps.js"></script> -->
+  
 </body>
+
+<footer>
+  <!-- Footer with same css as header including a link to a contact us page? -->
+</footer>
 
 </html>
