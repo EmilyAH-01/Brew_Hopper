@@ -11,7 +11,7 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
 2. [Project Overview](#projectoverview)
 3. [Assignment](#Assignment)
 4. [Project Requirements](#projectrequirements)
-5. [Project Requirements](#projectrequirements)
+5. [Presentation Requirements](#projectrequirements)
 6. [Scripted Features](#scriptedfeatures)
 7. [Execution](Execution)
 8. [Contains](#Contains)
