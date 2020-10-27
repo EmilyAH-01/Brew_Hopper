@@ -64,6 +64,19 @@
 
 /* Map Container Styling */
 
+@media screen and (max-width: 380px) {
+  #mapContainer {
+    width: 330px; 
+    height: 300px
+  };
+};
+@media screen and (min-width: 760px){
+  #mapContainer {
+    width: 640px; 
+    height: 480px
+  };
+};
+
 
 /* Map Title bar Styling */
 

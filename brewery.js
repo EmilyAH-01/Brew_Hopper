@@ -28,47 +28,49 @@ new H.mapevents.Behavior(mapEvents);
 
 var x = document.getElementById("locale");
 
-//this will pull city name from longitude and latitude
-function success(position) {
-    var latMaps = position.coords.latitude;
-    var lonMaps = position.coords.longitude;
-    map.setCenter({lat: latMaps, lng: lonMaps});
-    map.setZoom(13);
+$("#btnLocation").on("click", function() {
+    //this will pull city name from longitude and latitude
+    function success(position) {
+        var latMaps = position.coords.latitude;
+        var lonMaps = position.coords.longitude;
+        map.setCenter({lat: latMaps, lng: lonMaps});
+        map.setZoom(13);
 
-    var latLocal = "&lat=" + position.coords.latitude;
-    var lngLocal = "&lon=" + position.coords.longitude;
-    var myAPI = "pk.e571425f77b016689b9002ca2f527825";
+        var latLocal = "&lat=" + position.coords.latitude;
+        var lngLocal = "&lon=" + position.coords.longitude;
+        var myAPI = "pk.e571425f77b016689b9002ca2f527825";
 
-    var cityURL = "https://us1.locationiq.com/v1/reverse.php?key=";
-    var queryURL =  cityURL + myAPI + latLocal + lngLocal + "&format=json";
-    console.log("Latitude: " + latLocal);
-    console.log("Longitude: " + lngLocal);
-    console.log(queryURL);
+        var cityURL = "https://us1.locationiq.com/v1/reverse.php?key=";
+        var queryURL =  cityURL + myAPI + latLocal + lngLocal + "&format=json";
+        console.log("Latitude: " + latLocal);
+        console.log("Longitude: " + lngLocal);
+        console.log(queryURL);
 
-    $.ajax({
-		url: queryURL,
-		method: "GET"
+        $.ajax({
+            url: queryURL,
+            method: "GET"
 
-	})
-	.then(function(city) {
+        })
+        .then(function(city) {
 
-    console.log(city);
-    var cityLocale = city.address.city;
+        console.log(city);
+        var cityLocale = city.address.city;
 
-    brewery(cityLocale);
-    })
-}
-
-// function to see if browser supports geolocation
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        brewery(cityLocale);
+        })
     }
-}
 
-$("#btnLocation").on("click", getLocation());
+    // function to see if browser supports geolocation
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+});
+
+
 
 var locations = [];
 
