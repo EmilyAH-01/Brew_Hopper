@@ -11,7 +11,7 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
 2. [Project Overview](#projectoverview)
 3. [Assignment](#Assignment)
 4. [Project Requirements](#projectrequirements)
-5. [Project Requirements](#projectrequirements)
+5. [Presentation Requirements](#projectrequirements)
 6. [Scripted Features](#scriptedfeatures)
 7. [Execution](Execution)
 8. [Contains](#Contains)
@@ -33,11 +33,13 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
     <details>
         <summary>Click to expand</summary>
 
-    - Only contains the Main Header and the Location Search Input Page  
+    - Only contains the Main Header, overall map and the Location Search Input Page  
     
-    <!-- PlaceHolder for screenshots -->
-    <!-- *Opening Page*![Opening Page](https://github.com/JC72/JeffClegg_06_WeatherDashboard/blob/main/Assets/images/ScreenShots/OpenPage.png) -->
+    *Opening Page*![Opening Page](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/OpeningPage.png)
     
+    - Asks the user for permission to get location
+
+    *Permission for Location*![Permission](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/PermissionRequest.png)
 
     </details>
 
@@ -45,15 +47,18 @@ This project has been deployed to to Emily Herman's Personal GitHub Page. To get
     <details>
         <summary>Click to expand</summary>
 
-    - Shows the map of the area
-    - Displays the location of the locale breweries on the map
     - Gives a list of all the local breweries along with their information
     - Allows user to add the items to the map and calculate a route to the different locations 
     
-    <!-- *Initial Results*![Initial Results](https://github.com/JC72/JeffClegg_06_WeatherDashboard/blob/main/Assets/images/ScreenShots/InitialResults.png)
+    *Initial Results*![Initial Results](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/ListShowing.png)
     
-    *Second City Search*![Second Search](https://github.com/JC72/JeffClegg_06_WeatherDashboard/blob/main/Assets/images/ScreenShots/SecondSearch.png) -->
+    - Displays the location of the locale breweries on the map
 
+    *Brewery Location Added*![AddBrewery](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/ItemAdded.png)
+
+    - Shows the best route between the different locations
+
+    *Route Layout*![Route](https://github.com/EmilyAH-01/Brew_Hopper/blob/master/screenshots/Route.png)
     </details>
 
 ## Project Requirements: <a name="projectrequirements"></a>
