@@ -1,1 +1,0 @@
-// First script.js for Brew Hopper project
