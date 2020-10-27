@@ -17,7 +17,7 @@ var map = new H.Map(document.getElementById("mapContainer"), defaultLayers.vecto
 });
 
 // Add a resize listener to make sure that the map occupies the whole container
-window.addEventListener('resize', () => map.getViewPort().resize());
+// window.addEventListener('resize', () => map.getViewPort().resize());
 
 // Enable the event system on the map instance:
 var mapEvents = new H.mapevents.MapEvents(map);
@@ -27,6 +27,29 @@ new H.mapevents.Behavior(mapEvents);
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 var x = document.getElementById("locale");
+
+
+$(document).ready(function() {
+    $("#brewlistHeader").hide();
+})
+
+
+// this is the small change that I made to the function]
+// for somereason it called the function when the page loaded.
+$("#btnLocation").on("click", function(event){
+
+// function to see if browser supports geolocation
+    event.preventDefault();
+
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    
+});
+
 
 //this will pull city name from longitude and latitude
 function success(position) {
@@ -59,49 +82,43 @@ function success(position) {
     })
 }
 
-// function to see if browser supports geolocation
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-$("#btnLocation").on("click", getLocation());
-
 var locations = [];
 
 function brewery(cityLocale){
-// will get local brewery information based on the city
-// need to fiqure out how to pull other breweries from a radius
-var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
+
+    $("#brewlistHeader").show();
+
+    // will get local brewery information based on the city
+    // need to fiqure out how to pull other breweries from a radius
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
 
     // Perfoming an AJAX GET request to our queryURL
-    $.ajax({
-    url: queryURL,
-    method: "GET"
+        $.ajax({
+        url: queryURL,
+        method: "GET"
     })
 
     // After the data from the AJAX request comes back
     .then(function(response) {
         console.log(queryURL);
         console.log(response);
-        
-        // x.innerHTML = "Latitude: " + latLocal+ 
-        // "<br>Longitude: " + lngLocal+
-        // "<br>City: " + cityLocale;
 
         for(var i=0; i < response.length; i++) {
 
             var brewNum = i+1;
             var brewName = response[i].name;
-            var cityState = " " + response[i].city + ", " + response[i].state + " " + response[i].postal_code;
+            var zipCode = response[i].postal_code.substr(0,5);
+            var cityState = " " + response[i].city + ", " + response[i].state + " " + zipCode;
+            var phone = response[i].phone;
+
+            if (phone === "") {
+                var formatted = "Unlisted";
+            } else {
+                var formatted = "(" + phone.substr(0, 3)+ ") " + phone.substr(3, 3) + '-' + phone.substr(6,4);
+            }
+
 
             var webLinkaddress = response[i].website_url;
-
-            // if (webLinkaddress == "");
-            //     webLinkaddress = "Unknown";
 
             locations[i] = {
                 brewLat: response[i].latitude,
@@ -111,16 +128,24 @@ var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
             console.log(webLinkaddress);
 
             var startCard = $("<div>");
-            startCard.attr("id", "brewCards" + brewNum);
+            startCard.addClass("brewCard");
 
             var indCard = $("<div>");
-            indCard.addClass("brewCard");
+            indCard.attr("id", "brewCards" + brewNum);
 
             var webLink = $("<A>");
             webLink.addClass("link");
             webLink.attr({id: "weblink-" + brewNum});
-            webLink.attr("href", webLinkaddress);
-            webLink.text(webLinkaddress);
+
+                if (webLinkaddress === "") {
+                    var webLinktext = "Unknown";
+                    console.log(webLinkaddress);
+                } else {
+                    webLink.attr("href", webLinkaddress);
+                    var webLinktext = webLinkaddress.replace("http://","");
+                }
+
+            webLink.text(webLinktext);
         
             var nameHeader = $("<h4>");
             nameHeader.addClass("header4");
@@ -159,7 +184,7 @@ var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
             var breweryPar4 = $("<p>");
             breweryPar4.addClass("Phone");
             breweryPar4.attr({id:"Phone-" + brewNum});
-            breweryPar4.text("Phone: " + response[i].phone);
+            breweryPar4.text("Phone: " + formatted);
 
             var website = $("<span>");
             website.addClass("website");
@@ -181,7 +206,7 @@ var queryURL = "https://api.openbrewerydb.org/breweries?by_city="+cityLocale;
             $("#brewlist").append(startCard);
         }    
     })
-}
+};
 
 var breweriesClicked = [];
 console.log(breweriesClicked);
