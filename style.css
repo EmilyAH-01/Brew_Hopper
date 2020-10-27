@@ -1,3 +1,9 @@
+/* Body Styling */
+.fullsize {
+  height: 100%;
+  overflow: auto;
+}
+
 /* Title Bar Styling */
 .title-bar-left {
     color: whitesmoke;
@@ -81,6 +87,14 @@
 
 
 /* Footer Styling */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  overflow: auto;  
+}
 
 footer .btnContact {
   color: teal;
