@@ -28,21 +28,6 @@
   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
 
-  <style>
-    @media screen and (max-width: 380px) {
-      #mapContainer {
-        width: 330px; 
-        height: 300px
-      };
-    };
-    @media screen and (min-width: 760px){
-      #mapContainer {
-        width: 640px; 
-        height: 480px
-      };
-    };
-  </style>
-
 </head>
 
 <body style="background-image:url(https://www.designbolts.com/wp-content/uploads/2012/12/Skeletal-Weave-White-Tileable-pattern-for-website-background.jpg)">
@@ -60,7 +45,6 @@
   <main class="container">
     
     <!-- Left side of page with the user inputs -->
-    
     <div class="row">  
       
       <div id="userinputs" class="columns small-10 large-4" style="margin-top: 10px;">
@@ -70,8 +54,6 @@
               <span><i class="fas fa-beer"></i></span>
             </h3>
             <div class="row columns">
-              <!-- <label>Locate me:</label> -->
-              <!--<input id="userLocation" type="text" name="keyword" placeholder="xxx.xxx.xxx.xxx">-->
               <button id="btnLocation"><i class="fa fa-map-marker"></i> Locate Me</button>
             </div>
             <div class="row columns">
@@ -83,15 +65,7 @@
                 </select>
               </label>
             </div>
-            <!-- <div class="row columns">
-              <label>How Many:
-                <input id="userAmount" name="amount" type="number" min="1" max="5">
-              </label>
-            </div> -->
-            
-            
             <button id="btnSubmit" type="button" class="btnSubmit">
-
               Search
             </button>
           </form>
@@ -101,8 +75,7 @@
       <!-- Right side of the page will solely be the map(3/4s of page) place in  foundation/card? -->
       <div id="map" class="columns small-12 large-8" style="margin-top: 10px;">
         <!-- include a title bar to the map(find brews here) -->
-        <div id="mapContainer"></div>
-      
+        <div id="mapContainer" style="height:480px; width:640px"></div>
       </div>
     </div>  
 
@@ -119,12 +92,7 @@
   <!-- JQuery Script CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <!-- Created Javascript -->
-  <!-- <script src="script.js"></script> -->
-
   <script src="brewery.js"></script>
-
-  <!-- <script src="maps.js"></script> -->
   
 </body>
 
