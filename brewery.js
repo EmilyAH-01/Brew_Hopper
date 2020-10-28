@@ -96,7 +96,7 @@ function success(position) {
 
 var locations = [];
 
-function brewery(cityLocale){
+function brewery(){
 
     $("#brewlistHeader").show();
     $("#brewlist").empty();
