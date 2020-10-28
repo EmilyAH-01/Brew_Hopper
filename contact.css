@@ -1,0 +1,25 @@
+.title-bar-left {
+    color: whitesmoke;
+    font-size:x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .title-bar {
+      background-color: black;
+  }
+
+  .container h5 {
+      font-size: xx-large;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      color: teal;
+  }
+  
+
+  .card h5 {
+      font-size: xx-large;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      color: teal;
+  }
+  .card ul {
+      font-size: medium;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
